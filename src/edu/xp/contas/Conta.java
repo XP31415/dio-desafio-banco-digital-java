@@ -51,6 +51,6 @@ public abstract class Conta implements ContaInterface{
     }
     @Override
     public String toString() {
-        return "\nConta:"+"Titular: "+cliente.getNome()+", numero="+numero+", agencia="+agencia+", saldo="+saldo;
+        return String.format("\nConta:{ Titular: %s, conta n°= %d, agencia= %d, saldo= %.2f }",cliente.getNome(),numero,agencia,saldo);
     }
 }

@@ -39,14 +39,15 @@ public class Main {
 				switch (opc) {
 					case 1:
 						System.out.println("\nQuanto você deseja depositar?");
-						System.out.print("Saldo atual: " + cc.getSaldo() + "\n >> ");
+						System.out.printf("\tSaldo atual: %.2f\n >> ",cc.getSaldo());
 						cc.depositar(scan.nextDouble());
 						break;
 					
 					case 2:
 						System.out.println("\nQuanto você deseja sacar?");
-						System.out.print("Saldo atual: " + cc.getSaldo() + "\n >> ");
+						System.out.printf("\tSaldo atual: %.2f\n >> ",cc.getSaldo());
 						valor = scan.nextDouble();
+						
 						if (cc.getSaldo() > valor) {
 							cc.sacar(valor);
 						}else {
@@ -66,6 +67,8 @@ public class Main {
 			}
 		} else if (opc == 2) {
 			System.out.println("\nVamos continuar então");
+		} else {
+			System.out.println("\nVocê não escolheu uma opção válida!");
 		}
 
 		System.out.println("\nDeseja abrir uma conta poupança?");
@@ -83,13 +86,15 @@ public class Main {
 				switch (opc) {
 					case 1:
 						System.out.println("\nQuanto você deseja depositar?");
-						System.out.print("Saldo atual: " + poup.getSaldo() + "\n >> ");
+						System.out.printf("\tSaldo atual: %.2f\n >> ",poup.getSaldo());
 						poup.depositar(scan.nextDouble());
 						break;
 					
 					case 2:
 						System.out.print("\nQuanto você deseja sacar?\n >> ");
+						System.out.printf("\tSaldo atual: %.2f\n >> ",poup.getSaldo());
 						valor = scan.nextDouble();
+
 						if (poup.getSaldo() > valor) {
 							poup.sacar(valor);
 						}else {
@@ -109,9 +114,11 @@ public class Main {
 			}
 		} else if (opc == 2) {
 			System.out.println("\nVamos continuar então");
+		} else {
+			System.out.println("\nVocê não escolheu uma opção válida!");
 		}
 
-		System.out.print("\nDeseja fazer alguma transferência?\n1) Sim.\n2) Não. >> ");
+		System.out.print("\nDeseja fazer alguma transferência?\n1) Sim.\n2) Não.\n >> ");
 		opc = scan.nextInt();
 
 		if (opc == 1) {
@@ -121,14 +128,17 @@ public class Main {
 
 				while (verificador == true) {
 					System.out.println("\nO que você deseja?");
-					System.out.print("1) Transferir da conta corrente para a poupança.\n2) Transferir da conta poupança para a corrente.\n3) Encerrar. >> ");
+					System.out.println("1) Transferir da conta corrente para a poupança.\n2) Transferir da conta poupança para a corrente.\n3 ou outra opção) Encerrar.");
+					System.out.printf("\tSaldo atual Conta Corrente: %.2f\n",cc.getSaldo());
+					System.out.printf("\tSaldo atual Conta Poupança: %.2f\n >> ",poup.getSaldo());
+
 					opc = scan.nextInt();
 					
 					switch (opc) {
 						case 1:
 							System.out.println("\nQuanto você deseja transferir?");
-							System.out.println("\nSaldo atual Conta Corrente: " + cc.getSaldo());
-							System.out.println("Saldo atual Conta Poupança: " + poup.getSaldo());
+							System.out.printf("\tSaldo atual Conta Corrente: %.2f\n",cc.getSaldo());
+							System.out.printf("\tSaldo atual Conta Poupança: %.2f\n >> ",poup.getSaldo());
 							valor = scan.nextDouble();
 
 							if (cc.getSaldo() >= valor) {
@@ -140,8 +150,8 @@ public class Main {
 					
 						case 2:
 							System.out.println("\nQuanto você deseja transferir?");
-							System.out.println("\nSaldo atual Conta Corrente: " + cc.getSaldo());
-							System.out.println("Saldo atual Conta Poupança: " + poup.getSaldo());
+							System.out.printf("\tSaldo atual Conta Corrente: %.2f\n",cc.getSaldo());
+							System.out.printf("\tSaldo atual Conta Poupança: %.2f\n >> ",poup.getSaldo());
 							valor = scan.nextDouble();
 
 							if (poup.getSaldo() >= valor) {
@@ -153,6 +163,8 @@ public class Main {
 
 						case 3:
 							System.out.println("\n=== " + registro.getNome() + " ===\n" + registro.getContas());
+							cc.imprimirExtrato();
+							poup.imprimirExtrato();
 							verificador = false;
 							break;
 						
@@ -164,10 +176,19 @@ public class Main {
 			} if (contador < 2) {
 				System.out.println("Você precisa de pelo menos duas contas para fazer tranferências");
 				System.out.println("\n=== " + registro.getNome() + " ===\n" + registro.getContas());
+				cc.imprimirExtrato();
+				poup.imprimirExtrato();
 			}
 		} else if (opc == 2) {
 			System.out.println("\n=== " + registro.getNome() + " ===\n" + registro.getContas());
+			cc.imprimirExtrato();
+			poup.imprimirExtrato();
 			scan.close();
+		} else {
+			System.out.println("\n=== " + registro.getNome() + " ===\n" + registro.getContas());
+			System.out.println("\nVocê não escolheu uma opção válida!");
+			cc.imprimirExtrato();
+			poup.imprimirExtrato();
 		}
 	}
 }
